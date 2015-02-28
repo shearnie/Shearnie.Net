@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Shearnie.Net</id>
+    <version>1.0</version>
+    <title>Shearnie Random .Net Tools</title>
+    <authors>Steve Shearn</authors>
+    <owners>Steve Shearn</owners>
+    <licenseUrl>https://raw.githubusercontent.com/shearnie/Shearnie.Net/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/shearnie/Shearnie.Net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Random tools for .Net</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright Steve Shearn 2015</copyright>
+  </metadata>
+</package>
