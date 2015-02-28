@@ -47,6 +47,7 @@
     <Compile Include="Encryption\AES.cs" />
     <Compile Include="Encryption\PBKDF2.cs" />
     <Compile Include="Log4Steve.cs" />
+    <Compile Include="OzTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
