@@ -19,6 +19,9 @@ namespace Shearnie.Net
 
         public static DateTime ConvertUTC_To_AEST(DateTime date)
         {
+            if (date.Kind != DateTimeKind.Utc)
+                date = date.ToUniversalTime();
+
             return TimeZoneInfo.ConvertTimeFromUtc(date, tzidAEST);
         }
 
