@@ -31,6 +31,13 @@ namespace Shearnie.Net
             return ConvertUTC_To_AEST(Convert.ToDateTime(date));
         }
 
+        public static string ConvertUTC_To_AEST_ToString(DateTime? date, string format)
+        {
+            if (!date.HasValue) return "";
+            var dt = ConvertUTC_To_AEST(Convert.ToDateTime(date));
+            return dt.ToString(format);
+        }
+
         public static DateTime GetNowAEST()
         {
             return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tzidAEST);
