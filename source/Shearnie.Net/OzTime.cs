@@ -19,8 +19,18 @@ namespace Shearnie.Net
 
         public static DateTime ConvertUTC_To_AEST(DateTime date)
         {
-            if (date.Kind != DateTimeKind.Utc)
-                date = date.ToUniversalTime();
+            switch (date.Kind)
+            {
+                case DateTimeKind.Local:
+                    date = date.ToUniversalTime();
+                    break;
+
+                case DateTimeKind.Utc:
+                    break;
+
+                case DateTimeKind.Unspecified:
+                    break;
+            }
 
             return TimeZoneInfo.ConvertTimeFromUtc(date, tzidAEST);
         }
