@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Shearnie.Net</id>
-    <version>1.5</version>
+    <version>1.6</version>
     <title>Shearnie Random .Net Tools</title>
     <authors>Steve Shearn</authors>
     <owners>Steve Shearn</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/shearnie/Shearnie.Net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Random tools for .Net</description>
-    <releaseNotes>OzTime enhancements.</releaseNotes>
+    <releaseNotes>OzTime fixes.</releaseNotes>
     <copyright>Copyright Steve Shearn 2015</copyright>
   </metadata>
 </package>
