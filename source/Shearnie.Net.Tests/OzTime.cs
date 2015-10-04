@@ -16,6 +16,15 @@ namespace Shearnie.Net.Tests
         }
 
         [TestMethod]
+        public void ConvertAEST_To_UTC()
+        {
+            var rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(DateTime.Today);
+            rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(DateTime.Now);
+            rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(DateTime.UtcNow);
+            rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(new DateTime(2015, 10, 02, 22, 0, 0));
+        }
+
+        [TestMethod]
         public void ToString_UTC_To_AEST()
         {
             var rs = Shearnie.Net.OzTime.ToString_UTC_To_AEST(DateTime.Now, "dd MMM yyyy hh:mm tt");

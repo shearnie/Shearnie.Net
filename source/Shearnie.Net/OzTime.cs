@@ -17,6 +17,23 @@ namespace Shearnie.Net
             }
         }
 
+        public static DateTime ConvertAEST_To_UTC(DateTime date)
+        {
+            switch (date.Kind)
+            {
+                case DateTimeKind.Local:
+                    return date.ToUniversalTime();
+
+                case DateTimeKind.Utc:
+                    return date;
+
+                case DateTimeKind.Unspecified:
+                    break;
+            }
+
+            return TimeZoneInfo.ConvertTimeToUtc(date, tzidAEST);
+        }
+
         public static DateTime ConvertUTC_To_AEST(DateTime date)
         {
             switch (date.Kind)
