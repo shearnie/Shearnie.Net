@@ -14,23 +14,19 @@ namespace Shearnie.Net
         public static TimeZoneInfo tzidAEST => TimeZoneInfo.FindSystemTimeZoneById(AEST);
 
 
-        public static DateTime ConvertAEST_To_UTC(DateTime date)
-        {
-            return TimeZoneInfo.ConvertTimeBySystemTimeZoneId(new DateTime(date.Ticks), AEST, "UTC");
-        }
+        public static DateTime ConvertAEST_To_UTC(DateTime date) =>
+            TimeZoneInfo.ConvertTimeBySystemTimeZoneId(new DateTime(date.Ticks), AEST, "UTC");
+        
+        public static DateTime ConvertUTC_To_AEST(DateTime date) =>
+            TimeZoneInfo.ConvertTimeFromUtc(new DateTime(date.Ticks), tzidAEST);
 
-        public static DateTime ConvertUTC_To_AEST(DateTime date)
-        {
-            return TimeZoneInfo.ConvertTimeFromUtc(new DateTime(date.Ticks), tzidAEST);
-        }
 
         public static DateTime? ConvertAEST_To_UTC(DateTime? date) =>
             date.HasValue ? ConvertAEST_To_UTC(date.Value) : (DateTime?)null;
         
-
         public static DateTime? ConvertUTC_To_AEST(DateTime? date) =>
             date.HasValue ? ConvertUTC_To_AEST(date.Value) : (DateTime?)null;
-
+        
 
         public static string ToString_AEST_To_UTC(DateTime? date, string format) =>
             date.HasValue ? ConvertAEST_To_UTC(Convert.ToDateTime(date)).ToString(format) : "";
