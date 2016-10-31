@@ -7,77 +7,44 @@ using System.Threading.Tasks;
 namespace Shearnie.Net
 {
     public class OzTime
-    {
-        public static TimeZoneInfo tzidAEST
-        {
-            get
-            {
-                //// Get timezone id's here: http://stackoverflow.com/questions/5996320/net-timezoneinfo-from-olson-time-zone
-                return TimeZoneInfo.FindSystemTimeZoneById("E. Australia Standard Time");
-            }
-        }
+    {     
+        //// Get timezone id's here: http://stackoverflow.com/questions/5996320/net-timezoneinfo-from-olson-time-zone
+        public static string AEST => "E. Australia Standard Time";
+
+        public static TimeZoneInfo tzidAEST => TimeZoneInfo.FindSystemTimeZoneById(AEST);
+
 
         public static DateTime ConvertAEST_To_UTC(DateTime date)
         {
-            switch (date.Kind)
-            {
-                case DateTimeKind.Local:
-                    return date.ToUniversalTime();
-
-                case DateTimeKind.Utc:
-                    return date;
-
-                case DateTimeKind.Unspecified:
-                    break;
-            }
-
-            return TimeZoneInfo.ConvertTimeToUtc(date, tzidAEST);
+            return TimeZoneInfo.ConvertTimeBySystemTimeZoneId(
+                Convert.ToDateTime(date.ToString("dd MMM yyyy hh:mm:ss tt")), AEST, "UTC");
         }
 
         public static DateTime ConvertUTC_To_AEST(DateTime date)
         {
-            switch (date.Kind)
-            {
-                case DateTimeKind.Local:
-                    date = date.ToUniversalTime();
-                    break;
-
-                case DateTimeKind.Utc:
-                    break;
-
-                case DateTimeKind.Unspecified:
-                    break;
-            }
-
-            return TimeZoneInfo.ConvertTimeFromUtc(date, tzidAEST);
+            return TimeZoneInfo.ConvertTimeFromUtc(
+                Convert.ToDateTime(date.ToString("dd MMM yyyy hh:mm:ss tt")), tzidAEST);
         }
 
-        public static DateTime? ConvertUTC_To_AEST(DateTime? date)
-        {
-            if (!date.HasValue) return null;
-            return ConvertUTC_To_AEST(Convert.ToDateTime(date));
-        }
+        public static DateTime? ConvertAEST_To_UTC(DateTime? date) =>
+            date.HasValue ? ConvertAEST_To_UTC(date.Value) : (DateTime?)null;
+        
 
-        public static string ToString_UTC_To_AEST(DateTime? date, string format)
-        {
-            if (!date.HasValue) return "";
-            var dt = ConvertUTC_To_AEST(Convert.ToDateTime(date));
-            return dt.ToString(format);
-        }
+        public static DateTime? ConvertUTC_To_AEST(DateTime? date) =>
+            date.HasValue ? ConvertUTC_To_AEST(date.Value) : (DateTime?)null;
 
-        public static DateTime GetNowAEST()
-        {
-            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tzidAEST);
-        }
 
-        public static DateTime GetMidnightAEST()
-        {
-            return GetNowAEST().Date;
-        }
+        public static string ToString_AEST_To_UTC(DateTime? date, string format) =>
+            date.HasValue ? ConvertAEST_To_UTC(Convert.ToDateTime(date)).ToString(format) : "";
 
-        public static DateTime GetMidnightUTC()
-        {
-            return TimeZoneInfo.ConvertTimeToUtc(GetMidnightAEST(), tzidAEST);
-        }
+        public static string ToString_UTC_To_AEST(DateTime? date, string format) =>
+            date.HasValue ? ConvertUTC_To_AEST(Convert.ToDateTime(date)).ToString(format) : "";
+        
+
+        public static DateTime GetNowAEST() => ConvertUTC_To_AEST(DateTime.UtcNow);
+
+        public static DateTime GetMidnightAEST() => GetNowAEST().Date;
+
+        public static DateTime GetMidnightUTC() => ConvertAEST_To_UTC(GetMidnightAEST());
     }
 }
