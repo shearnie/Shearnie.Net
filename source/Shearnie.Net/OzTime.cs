@@ -16,14 +16,12 @@ namespace Shearnie.Net
 
         public static DateTime ConvertAEST_To_UTC(DateTime date)
         {
-            return TimeZoneInfo.ConvertTimeBySystemTimeZoneId(
-                Convert.ToDateTime(date.ToString("dd MMM yyyy hh:mm:ss tt")), AEST, "UTC");
+            return TimeZoneInfo.ConvertTimeBySystemTimeZoneId(new DateTime(date.Ticks), AEST, "UTC");
         }
 
         public static DateTime ConvertUTC_To_AEST(DateTime date)
         {
-            return TimeZoneInfo.ConvertTimeFromUtc(
-                Convert.ToDateTime(date.ToString("dd MMM yyyy hh:mm:ss tt")), tzidAEST);
+            return TimeZoneInfo.ConvertTimeFromUtc(new DateTime(date.Ticks), tzidAEST);
         }
 
         public static DateTime? ConvertAEST_To_UTC(DateTime? date) =>

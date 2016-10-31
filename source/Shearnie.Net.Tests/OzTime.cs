@@ -9,19 +9,32 @@ namespace Shearnie.Net.Tests
         [TestMethod]
         public void ConvertUTC_To_AEST()
         {
-            var rs = Shearnie.Net.OzTime.ConvertUTC_To_AEST(DateTime.Today);
-            rs = Shearnie.Net.OzTime.ConvertUTC_To_AEST(DateTime.Now);
-            rs = Shearnie.Net.OzTime.ConvertUTC_To_AEST(DateTime.UtcNow);
-            rs = Shearnie.Net.OzTime.ConvertUTC_To_AEST(new DateTime(2015, 10, 02, 22, 0, 0));
+            Assert.AreEqual(
+                new DateTime(2015, 10, 03, 08, 0, 0), 
+                Shearnie.Net.OzTime.ConvertUTC_To_AEST(new DateTime(2015, 10, 02, 22, 0, 0)));
+
+            DateTime? dt = new DateTime(2015, 10, 02, 22, 0, 0);
+            Assert.AreEqual(
+                new DateTime(2015, 10, 03, 08, 0, 0), Shearnie.Net.OzTime.ConvertUTC_To_AEST(dt));
         }
 
         [TestMethod]
         public void ConvertAEST_To_UTC()
         {
-            var rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(DateTime.Today);
-            rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(DateTime.Now);
-            rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(DateTime.UtcNow);
-            rs = Shearnie.Net.OzTime.ConvertAEST_To_UTC(new DateTime(2015, 10, 02, 22, 0, 0));
+            Assert.AreEqual(
+                new DateTime(2015, 10, 02, 12, 0, 0),
+                Shearnie.Net.OzTime.ConvertAEST_To_UTC(new DateTime(2015, 10, 02, 22, 0, 0)));
+
+            DateTime? dt = new DateTime(2015, 10, 02, 22, 0, 0);
+            Assert.AreEqual(
+                new DateTime(2015, 10, 02, 12, 0, 0), Shearnie.Net.OzTime.ConvertAEST_To_UTC(dt));
+        }
+
+        [TestMethod]
+        public void Now()
+        {
+            var now = DateTime.UtcNow;
+            Assert.AreEqual(now.AddHours(10), Shearnie.Net.OzTime.ConvertUTC_To_AEST(now));
         }
 
         [TestMethod]
